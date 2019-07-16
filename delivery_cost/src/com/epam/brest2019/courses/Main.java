@@ -1,24 +1,24 @@
 package com.epam.brest2019.courses;
 
 import com.epam.brest2019.courses.calc.Calculator;
-import com.epam.brest2019.courses.calc.CalculatorImpl;
-import com.epam.brest2019.courses.files.CSVFileReader;
 import com.epam.brest2019.courses.files.FileReader;
 import com.epam.brest2019.courses.menu.CorrectValue;
 import com.epam.brest2019.courses.menu.EnteredValue;
 import com.epam.brest2019.courses.menu.ExitValue;
 import com.epam.brest2019.courses.menu.IncorrectValue;
-import com.epam.brest2019.courses.selector.SelectorFromMap;
 import com.epam.brest2019.courses.selector.ValueSelector;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Component;
 
-import javax.xml.bind.ValidationEvent;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Map;
 import java.util.Scanner;
 
+@Component
 public class Main {
 
     private static final String QUIT_SYMBOL = "q";
@@ -27,11 +27,33 @@ public class Main {
     private static final String FILE_KM_PRICES = "price_per_km.csv";
 
     public static void main(String[] args) throws IOException {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+        Main main = applicationContext.getBean(Main.class);
+        main.run();
+    }
 
-        Main main = new Main();
+    @Value("${weight.message}")
+    private String messageWeight;
+
+    @Value("${distance.message}")
+    private String messageDistance;
+
+    private FileReader fileReader;
+
+    private Calculator calculator;
+
+    private ValueSelector selector;
+
+    public Main(FileReader fileReader, Calculator calculator, ValueSelector selector) {
+        this.fileReader = fileReader;
+        this.calculator = calculator;
+        this.selector = selector;
+    }
+
+    private void run() throws IOException {
+
         Scanner scanner = new Scanner(System.in);
 
-        FileReader fileReader = new CSVFileReader();
         Map<Integer, BigDecimal> weightPrices = fileReader.readData(FILE_KG_PRICES);
         if (weightPrices == null || weightPrices.isEmpty()) {
             throw new FileNotFoundException("File with prices per kg not found.");
@@ -42,18 +64,15 @@ public class Main {
             throw new FileNotFoundException("File with prices per km not found.");
         }
 
-        Calculator calculator = new CalculatorImpl();
-        ValueSelector selector = new SelectorFromMap();
-
         BigDecimal weight;
         BigDecimal distance;
         EnteredValue enteredValue;
         do {
             System.out.println("==========================================================");
-            enteredValue = main.receiveValueFromConsole("Enter weight in kg or 'q' for quit", scanner);
+            enteredValue = receiveValueFromConsole(messageWeight, scanner);
             if (enteredValue.getType() != EnteredValue.Types.EXIT) {
                 weight = ((CorrectValue) enteredValue).getValue();
-                enteredValue = main.receiveValueFromConsole("Enter distance in km or 'q' for quit", scanner);
+                enteredValue = receiveValueFromConsole(messageDistance, scanner);
                 if (enteredValue.getType() != EnteredValue.Types.EXIT) {
                     distance = ((CorrectValue) enteredValue).getValue();
 
@@ -94,5 +113,4 @@ public class Main {
         }
         return result;
     }
-
 }
