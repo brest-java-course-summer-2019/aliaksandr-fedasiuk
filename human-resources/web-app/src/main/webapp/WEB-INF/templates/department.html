@@ -27,8 +27,12 @@
                                               height="32" width="32" alt="HR"></a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <a class="nav-item nav-link active" href="departments.html">Departments</a>
-                <a class="nav-item nav-link" href="employees.html">Employees</a>
+                <a class="nav-item nav-link active"
+                   href="departments.html"
+                   th:href="@{/departments}">Departments</a>
+                <a class="nav-item nav-link"
+                   href="employees.html"
+                   th:href="@{/employees}">Employees</a>
             </ul>
         </div>
     </nav>
@@ -37,12 +41,15 @@
 
         <ul class="navbar-nav float-lg-left">
             <li class="nav-item"
-                title="Back to list"><a href="departments.html" class="btn btn-light btn-block"><i
+                title="Back to list"><a href="departments.html"
+                                        th:href="@{/departments}"
+                                        class="btn btn-light btn-block"><i
                     class="fa fa-arrow-left"></i></a></li>
         </ul>
         <span class="navbar-brand text-uppercase mr-auto">Edit department</span>
         <ul class="navbar-nav">
             <li class="nav-item"><a href="departments.html"
+                                    th:href="@{/departments}"
                                     class="btn btn-light"
                                     title="Save department"
                                     data-toggle="tooltip"

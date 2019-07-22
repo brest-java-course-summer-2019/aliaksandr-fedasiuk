@@ -27,8 +27,12 @@
                                               height="32" width="32" alt="HR"></a>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <a class="nav-item nav-link" href="departments.html">Departments</a>
-                <a class="nav-item nav-link active" href="employees.html">Employees</a>
+                <a class="nav-item nav-link"
+                   href="departments.html"
+                   th:href="@{/departments}">Departments</a>
+                <a class="nav-item nav-link active"
+                   href="employees.html"
+                   th:href="@{/employees}">Employees</a>
             </ul>
         </div>
     </nav>
@@ -38,6 +42,7 @@
         <ul class="navbar-nav float-right">
             <li class="nav-item">
                 <a href="employee.html"
+                   th:href="@{/employee}"
                    class="btn btn-light"
                    title="Add employee"
                    data-toggle="tooltip"
@@ -70,6 +75,7 @@
                             <td>1000</td>
                             <td class="text-right">
                                 <a href="employee.html"
+                                   th:href="@{/employee}"
                                    class="btn-sm btn-outline-secondary"
                                    title="Edit employee"
                                    data-toggle="tooltip"
@@ -91,6 +97,7 @@
                             <td>1100</td>
                             <td class="text-right">
                                 <a href="employee.html"
+                                   th:href="@{/employee}"
                                    class="btn-sm btn-outline-secondary"
                                    title="Edit employee"
                                    data-toggle="tooltip"
