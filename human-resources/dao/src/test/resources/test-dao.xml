@@ -8,7 +8,7 @@
         <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="departmentDao" class="com.epam.brest.summer.courses2019.DepartmentDaoJdbcImpl">
+    <bean id="departmentDao" class="com.epam.brest.summer.courses2019.dao.DepartmentDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 

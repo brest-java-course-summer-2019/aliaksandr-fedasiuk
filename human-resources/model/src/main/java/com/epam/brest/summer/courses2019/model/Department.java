@@ -23,6 +23,21 @@ public class Department {
     private BigDecimal avgSalary;
 
     /**
+     * Constructor without arguments.
+     */
+    public Department() {
+    }
+
+    /**
+     * Constructor with department name.
+     *
+     * @param departmentName department name
+     */
+    public Department(String departmentName) {
+        this.departmentName = departmentName;
+    }
+
+    /**
      * Returns <code>Integer</code> representation of this departmentId.
      *
      * @return departmentId Department Id.
