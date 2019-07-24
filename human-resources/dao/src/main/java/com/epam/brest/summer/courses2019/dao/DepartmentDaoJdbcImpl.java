@@ -28,13 +28,17 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     private final static String SELECT_ALL =
             "select d.department_id, d.department_name from department d order by 2";
 
-    private static final String FIND_BY_ID = "select department_id, department_name from department where department_id = :departmentId";
+    private static final String FIND_BY_ID =
+            "select department_id, department_name from department where department_id = :departmentId";
 
-    private final static String ADD_DEPARTMENT = "insert into department (department_name) values (:departmentName)";
+    private final static String ADD_DEPARTMENT =
+            "insert into department (department_name) values (:departmentName)";
 
-    private static final String UPDATE = "update department set department_name = :departmentName where department_id = :departmentId";
+    private static final String UPDATE =
+            "update department set department_name = :departmentName where department_id = :departmentId";
 
-    private static final String DELETE = "delete from department where department_id = :departmentId";
+    private static final String DELETE =
+            "delete from department where department_id = :departmentId";
 
     private static final String DEPARTMENT_ID = "departmentId";
 
