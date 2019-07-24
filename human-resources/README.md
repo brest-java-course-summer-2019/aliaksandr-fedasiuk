@@ -16,3 +16,11 @@
   ## Running the tests  
   > mvn clean test  
   
+  ### Server test
+  
+  For server test jetty plugin can be used
+  
+      mvn jetty:run 
+      
+  Open [http://localhost:8080](http://localhost:8080/hello) 
+  
