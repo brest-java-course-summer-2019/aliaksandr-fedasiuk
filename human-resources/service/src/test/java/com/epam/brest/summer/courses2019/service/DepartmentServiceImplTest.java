@@ -1,7 +1,6 @@
 package com.epam.brest.summer.courses2019.service;
 
 import com.epam.brest.summer.courses2019.model.Department;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-service.xml"})
-class DepartmentServiceImplTest {
+public class DepartmentServiceImplTest {
 
     @Autowired
     private DepartmentService departmentService;
@@ -48,11 +47,11 @@ class DepartmentServiceImplTest {
         assertEquals("name", department.getDepartmentName());
     }
 
-    @Test()
+    @Test
     void delete() {
         int id = 3;
         departmentService.delete(id);
-        Assertions.assertThrows(RuntimeException.class, () -> departmentService.findById(id));
+        assertThrows(RuntimeException.class, () -> departmentService.findById(id));
     }
 
     private Department create() {
