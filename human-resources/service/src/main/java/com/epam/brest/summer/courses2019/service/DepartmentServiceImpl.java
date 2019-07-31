@@ -6,6 +6,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *  Department Service Interface implementation.
+ */
 public class DepartmentServiceImpl implements DepartmentService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
@@ -20,6 +23,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     public List<Department> findAll() {
         LOGGER.debug("Find all departments");
         return dao.findAll();
+    }
+
+    @Override
+    public List<Department> findAllWithAvgSalary() {
+        LOGGER.debug("Find all departments with filled avg salary");
+        return dao.findAllWithAvgSalary();
     }
 
     @Override

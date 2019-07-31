@@ -38,7 +38,6 @@
         <java.optimize>true</java.optimize>
         <java.debug>true</java.debug>
 
-        <org.springframework.version>5.1.4.RELEASE</org.springframework.version>
         <junit.version>5.2.0</junit.version>
         <logback.version>1.2.3</logback.version>
 
@@ -124,11 +123,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-context</artifactId>
-                <version>${org.springframework.version}</version>
-            </dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-web</artifactId>
@@ -226,6 +220,12 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-pmd-plugin</artifactId>
                     <version>${maven-pmd-plugin.vesrion}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jxr-plugin</artifactId>
+                    <version>3.0.0</version>
                 </plugin>
 
                 <plugin>
@@ -369,6 +369,11 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                     <failOnViolation>true</failOnViolation> <!-- this is actually true by default, but can be disabled -->
@@ -416,6 +421,11 @@
 
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jxr-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-pmd-plugin</artifactId>
                 <configuration>
                     <linkXref>true</linkXref>
@@ -436,6 +446,7 @@
                     </reportSet>
                 </reportSets>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
@@ -447,12 +458,12 @@
                             <report>javadoc</report>
                         </reports>
                     </reportSet>
-                    <reportSet>
-                        <id>aggregate</id>
-                        <reports>
-                            <report>aggregate</report>
-                        </reports>
-                    </reportSet>
+                    <!--<reportSet>-->
+                        <!--<id>aggregate</id>-->
+                        <!--<reports>-->
+                            <!--<report>aggregate</report>-->
+                        <!--</reports>-->
+                    <!--</reportSet>-->
                 </reportSets>
             </plugin>
 

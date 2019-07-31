@@ -40,6 +40,13 @@ public interface DepartmentDao {
     List<Department> findAll();
 
     /**
+     * Get all departments with avg salary by department.
+     *
+     * @return departments list.
+     */
+    List<Department> findAllWithAvgSalary();
+
+    /**
      * Get Department By Id.
      *
      * @param departmentId departmentId

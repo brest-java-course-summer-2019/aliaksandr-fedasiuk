@@ -13,6 +13,7 @@ public class DepartmentController {
     /**
      * Goto departments list page.
      *
+     * @param model model
      * @return view name
      */
     @GetMapping(value = "/departments")
@@ -23,6 +24,7 @@ public class DepartmentController {
     /**
      * Goto department page.
      *
+     * @param model model
      * @return view name
      */
     @GetMapping(value = "/department")

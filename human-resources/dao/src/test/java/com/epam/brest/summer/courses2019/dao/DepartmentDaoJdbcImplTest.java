@@ -1,21 +1,22 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Department;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath*:test-dao.xml"})
+@Transactional
+@Rollback
 public class DepartmentDaoJdbcImplTest {
 
     private static final String DEVELOPMENT = "DEV";
@@ -33,11 +34,19 @@ public class DepartmentDaoJdbcImplTest {
     }
 
     @Test
+    public void findAllWithAvgSalary() {
+        List<Department> departments = departmentDao.findAllWithAvgSalary();
+        assertNotNull(departments);
+        assertTrue(departments.size() > 0);
+        assertTrue(departments.get(0).getAvgSalary().intValue() > 0);
+    }
+
+    @Test
     public void getDepartmentById() {
         Department department = departmentDao.findById(1).get();
         assertNotNull(department);
         assertTrue(department.getDepartmentId().equals(1));
-        assertTrue(department.getDepartmentName().equals(DEVELOPMENT));
+        assertEquals(DEVELOPMENT, department.getDepartmentName());
     }
 
     @Test

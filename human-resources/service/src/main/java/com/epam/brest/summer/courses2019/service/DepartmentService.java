@@ -3,6 +3,9 @@ package com.epam.brest.summer.courses2019.service;
 import com.epam.brest.summer.courses2019.model.Department;
 import java.util.List;
 
+/**
+ * Department Service Interface.
+ */
 public interface DepartmentService {
 
     /**
@@ -11,6 +14,13 @@ public interface DepartmentService {
      * @return departments .
      */
     List<Department> findAll();
+
+    /**
+     * Get all departments with avg salary by department.
+     *
+     * @return departments list.
+     */
+    List<Department> findAllWithAvgSalary();
 
     /**
      * Find Department By Id.
