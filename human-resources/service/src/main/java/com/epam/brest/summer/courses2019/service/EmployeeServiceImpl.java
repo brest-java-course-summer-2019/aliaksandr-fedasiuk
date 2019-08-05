@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -40,10 +39,10 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Optional<Employee> findById(Integer employeeId) {
+    public Employee findById(Integer employeeId) {
         LOGGER.debug("findById({})", employeeId);
-        return Optional.of(employeeDao.findById(employeeId).orElseThrow(()
-                -> new RuntimeException("Failed to get employee from DB")));
+        return employeeDao.findById(employeeId)
+                .orElseThrow(() -> new RuntimeException("Failed to get employee from DB"));
     }
 
     @Override
