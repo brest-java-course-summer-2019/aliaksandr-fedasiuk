@@ -3,7 +3,6 @@ package com.epam.brest.summer.courses2019.service;
 import com.epam.brest.summer.courses2019.model.Employee;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Employee Service Interface.
@@ -31,7 +30,7 @@ public interface EmployeeService {
      * @param employeeId employee id
      * @return employee by id
      */
-    Optional<Employee> findById(Integer employeeId);
+    Employee findById(Integer employeeId);
 
     /**
      * Persist new employee.
