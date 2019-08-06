@@ -5,10 +5,12 @@ import com.epam.brest.summer.courses2019.model.Department;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *  Department Service Interface implementation.
  */
+@Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DepartmentServiceImpl.class);
@@ -48,5 +50,12 @@ public class DepartmentServiceImpl implements DepartmentService {
     public void delete(int id) {
         LOGGER.debug("delete({})", id);
         dao.delete(id);
+    }
+
+    @Override
+    public void add(Department... departments) {
+        for (Department department : departments) {
+            dao.add(department);
+        }
     }
 }

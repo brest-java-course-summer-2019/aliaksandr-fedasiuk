@@ -4,6 +4,7 @@ import com.epam.brest.summer.courses2019.model.Department;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
@@ -52,6 +53,14 @@ public class DepartmentServiceImplTest {
         int id = 3;
         departmentService.delete(id);
         assertThrows(RuntimeException.class, () -> departmentService.findById(id));
+    }
+
+    @Test
+    void add() {
+        long count = departmentService.findAll().size();
+        assertThrows(DuplicateKeyException.class, () -> departmentService.add(create(), create()));
+        long newCount = departmentService.findAll().size();
+        assertEquals(count, newCount);
     }
 
     private Department create() {

@@ -43,4 +43,6 @@ public interface DepartmentService {
      * @param id department id
      */
     void delete(int id);
+
+    void add(Department... departments);
 }
