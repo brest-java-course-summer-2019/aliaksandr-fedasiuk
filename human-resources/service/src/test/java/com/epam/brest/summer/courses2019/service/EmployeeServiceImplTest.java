@@ -11,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath*:test-db.xml", "classpath:test-service.xml"})
@@ -29,5 +28,40 @@ public class EmployeeServiceImplTest {
 
         assertNotNull(employees);
         assertFalse(employees.isEmpty());
+    }
+
+    @Test
+    void findById() {
+        int id = 1;
+        Employee employee = employeeService.findById(id);
+
+        assertNotNull(employee);
+        assertEquals("FUSER10", employee.getFirstName());
+    }
+
+    @Test
+    void update() {
+        int id = 2;
+        Employee employee = create();
+        employee.setEmployeeId(id);
+        employeeService.update(employee);
+        employee = employeeService.findById(id);
+
+        assertNotNull(employee);
+        assertEquals("name", employee.getFirstName());
+    }
+
+    @Test
+    void delete() {
+        int id = 3;
+        employeeService.delete(id);
+        assertThrows(RuntimeException.class, () -> employeeService.findById(id));
+    }
+
+    private Employee create() {
+        Employee employee = new Employee();
+        employee.setDepartmentId(1);
+        employee.setFirstName("name");
+        return employee;
     }
 }
