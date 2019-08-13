@@ -5,11 +5,13 @@ import com.epam.brest.summer.courses2019.model.Department;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
  *  Department Service Interface implementation.
  */
+@Component
 @Transactional
 public class DepartmentServiceImpl implements DepartmentService {
 
