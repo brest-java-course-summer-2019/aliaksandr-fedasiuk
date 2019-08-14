@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 /**
  * Department controller.
@@ -62,5 +63,19 @@ public class DepartmentController {
         model.addAttribute("isNew", true);
         model.addAttribute("department", department);
         return "department";
+    }
+
+    /**
+     * Persist new department into persistence storage.
+     *
+     * @param department new department with filled data.
+     * @return view name
+     */
+    @PostMapping(value = "/department")
+    public String addDepartment(Department department) {
+
+        LOGGER.debug("addDepartment({})", department);
+        this.departmentService.add(department);
+        return "redirect:/departments";
     }
 }
