@@ -50,13 +50,17 @@ public class DepartmentController {
     }
 
     /**
-     * Goto department page.
+     * Goto add department page.
      *
-     * @param model model
      * @return view name
      */
     @GetMapping(value = "/department")
     public final String gotoAddDepartmentPage(Model model) {
+
+        LOGGER.debug("gotoAddDepartmentPage({})", model);
+        Department department = new Department();
+        model.addAttribute("isNew", true);
+        model.addAttribute("department", department);
         return "department";
     }
 }

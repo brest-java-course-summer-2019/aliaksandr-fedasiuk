@@ -46,7 +46,8 @@
                                         class="btn btn-light btn-block"><i
                     class="fa fa-arrow-left"></i></a></li>
         </ul>
-        <span class="navbar-brand text-uppercase mr-auto">Edit department</span>
+        <span class="navbar-brand text-uppercase mr-auto"
+              th:text="${isNew} ? 'New department' : 'Edit department'">Edit department</span>
         <ul class="navbar-nav">
             <li class="nav-item"><a href="departments.html"
                                     th:href="@{/departments}"
