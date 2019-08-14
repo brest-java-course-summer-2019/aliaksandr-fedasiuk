@@ -20,12 +20,12 @@ public class DepartmentValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
-        ValidationUtils.rejectIfEmpty(errors, "departmentName", "Please provide department name");
+        ValidationUtils.rejectIfEmpty(errors, "departmentName", "departmentName.empty");
         Department department = (Department) target;
 
         if (StringUtils.hasLength(department.getDepartmentName())
                 && department.getDepartmentName().length() > DEPARTMENT_NAME_MAX_SIZE) {
-            errors.rejectValue("departmentName", "Department name size have to be <= 255 symbols");
+            errors.rejectValue("departmentName", "departmentName.maxSize255");
         }
     }
 }
