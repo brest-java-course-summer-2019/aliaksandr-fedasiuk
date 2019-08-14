@@ -1,0 +1,31 @@
+package com.epam.brest.summer.courses2019.web_app.validators;
+
+import com.epam.brest.summer.courses2019.model.Department;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ValidationUtils;
+import org.springframework.validation.Validator;
+
+@Component
+public class DepartmentValidator implements Validator {
+
+    public static final int DEPARTMENT_NAME_MAX_SIZE = 255;
+
+    @Override
+    public boolean supports(Class<?> clazz) {
+        return Department.class.equals(clazz);
+    }
+
+    @Override
+    public void validate(Object target, Errors errors) {
+
+        ValidationUtils.rejectIfEmpty(errors, "departmentName", "Please provide department name");
+        Department department = (Department) target;
+
+        if (StringUtils.hasLength(department.getDepartmentName())
+                && department.getDepartmentName().length() > DEPARTMENT_NAME_MAX_SIZE) {
+            errors.rejectValue("departmentName", "Department name size have to be <= 255 symbols");
+        }
+    }
+}
