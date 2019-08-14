@@ -51,6 +51,19 @@ public class DepartmentController {
     }
 
     /**
+     * Update department into persistence storage.
+     *
+     * @return view name
+     */
+    @PostMapping(value = "/department/{id}")
+    public String updateDepartment(Department department) {
+
+        LOGGER.debug("updateDepartment({})", department);
+        this.departmentService.update(department);
+        return "redirect:/departments";
+    }
+
+    /**
      * Goto add department page.
      *
      * @return view name

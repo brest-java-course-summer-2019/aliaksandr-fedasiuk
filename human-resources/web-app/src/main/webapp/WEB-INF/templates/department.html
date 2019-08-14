@@ -72,6 +72,11 @@
                               action="departments.html"
                               th:action="@{${#httpServletRequest.servletPath}}"
                               th:method="@{post}">
+
+                            <input id="field_departmentId"
+                                   type="hidden"
+                                   th:field="*{departmentId}"/>
+
                             <div class="form-group">
                                 <label class="form-control-label"
                                        for="field_departmentName">Department Name</label>
