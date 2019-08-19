@@ -31,7 +31,7 @@ public class DepartmentRestConsumer implements DepartmentService {
     public List<Department> findAllWithAvgSalary() {
         LOGGER.debug("findAllWithAvgSalary()");
         ResponseEntity responseEntity = restTemplate.getForEntity(url + "/with_avg_salary", List.class);
-        return  (List<Department>) responseEntity.getBody();
+        return (List<Department>) responseEntity.getBody();
     }
 
     @Override
@@ -55,6 +55,9 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public void add(Department... departments) {
-
+        LOGGER.debug("add({})", departments);
+        for (Department department : departments) {
+            restTemplate.postForEntity(url, department, Department.class);
+        }
     }
 }

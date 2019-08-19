@@ -36,16 +36,22 @@ public class DepartmentRestController {
         return service.findById(id);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    @PutMapping()
     public void update(@RequestBody Department department) {
         LOGGER.debug("update department ({})", department);
         service.update(department);
     }
 
-    @RequestMapping(value = "/departments/{id}", method = RequestMethod.DELETE)
+    @DeleteMapping(value = "/departments/{id}")
     public void delete(@PathVariable("id") int id) {
         LOGGER.debug("delete department ({})", id);
         service.delete(id);
+    }
+
+    @PostMapping()
+    public void add(@RequestBody Department department) {
+        LOGGER.debug("add department({})", department);
+        service.add(department);
     }
 
 }
