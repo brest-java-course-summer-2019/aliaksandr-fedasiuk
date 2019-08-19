@@ -43,7 +43,8 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public void update(Department department) {
-
+        LOGGER.debug("update({})", department);
+        restTemplate.put(url, department);
     }
 
     @Override

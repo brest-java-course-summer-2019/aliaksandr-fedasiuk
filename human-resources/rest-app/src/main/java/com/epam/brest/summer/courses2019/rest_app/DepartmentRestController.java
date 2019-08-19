@@ -35,4 +35,11 @@ public class DepartmentRestController {
         LOGGER.debug("find department by id({})", id);
         return service.findById(id);
     }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void update(@RequestBody Department department) {
+        LOGGER.debug("update department ({})", department);
+        service.update(department);
+    }
+
 }
