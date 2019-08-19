@@ -32,6 +32,10 @@
         </dependency>
         <dependency>
             <groupId>com.epam.brest.summer.courses2019</groupId>
+            <artifactId>service-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.epam.brest.summer.courses2019</groupId>
             <artifactId>service</artifactId>
         </dependency>
 
