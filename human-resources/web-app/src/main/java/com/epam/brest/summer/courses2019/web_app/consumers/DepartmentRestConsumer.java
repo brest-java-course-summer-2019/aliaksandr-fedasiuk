@@ -36,7 +36,9 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public Department findById(Integer id) {
-        return null;
+        LOGGER.debug("findById({})", id);
+        ResponseEntity<Department> responseEntity = restTemplate.getForEntity(url + "/" + id, Department.class);
+        return responseEntity.getBody();
     }
 
     @Override
