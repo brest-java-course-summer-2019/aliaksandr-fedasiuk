@@ -49,7 +49,8 @@ public class DepartmentRestConsumer implements DepartmentService {
 
     @Override
     public void delete(int id) {
-
+        LOGGER.debug("delete({})", id);
+        restTemplate.delete(url + "/" + id);
     }
 
     @Override

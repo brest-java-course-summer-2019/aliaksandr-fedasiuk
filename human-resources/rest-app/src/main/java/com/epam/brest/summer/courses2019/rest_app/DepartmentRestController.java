@@ -42,4 +42,10 @@ public class DepartmentRestController {
         service.update(department);
     }
 
+    @RequestMapping(value = "/departments/{id}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable("id") int id) {
+        LOGGER.debug("delete department ({})", id);
+        service.delete(id);
+    }
+
 }
