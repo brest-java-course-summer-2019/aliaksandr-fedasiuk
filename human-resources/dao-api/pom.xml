@@ -9,11 +9,9 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>service-api</artifactId>
+    <artifactId>dao-api</artifactId>
 
-    <name>Human Resources Service API</name>
-
-    <packaging>jar</packaging>
+    <name>Human Resources DAO API</name>
 
     <dependencies>
         <dependency>
