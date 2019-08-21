@@ -1,6 +1,7 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.stub.DepartmentStub;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
@@ -15,14 +16,8 @@ public class DepartmentStubDaoJdbcImpl implements DepartmentStubDao {
 
     private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    private static final String SELECT_ALL_WITH_AVG_SALARY =
-            "select d.department_id as departmentId,"
-                    + " d.department_name as departmentName,"
-                    + " avg(e.salary) as avgSalary"
-                    + " from department d"
-                    + " left join employee e on d.department_id = e.department_id"
-                    + " group by d.department_id, d.department_name"
-                    + " order by department_name";
+    @Value("${departmentStub.findAllWithAvgSalary}")
+    private String findAllWithAvgSalarySql;
 
 
     public DepartmentStubDaoJdbcImpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -31,7 +26,7 @@ public class DepartmentStubDaoJdbcImpl implements DepartmentStubDao {
 
     @Override
     public List<DepartmentStub> findAllWithAvgSalary() {
-        List<DepartmentStub> departments = namedParameterJdbcTemplate.query(SELECT_ALL_WITH_AVG_SALARY,
+        List<DepartmentStub> departments = namedParameterJdbcTemplate.query(findAllWithAvgSalarySql,
                 BeanPropertyRowMapper.newInstance(DepartmentStub.class));
         return departments;
     }
