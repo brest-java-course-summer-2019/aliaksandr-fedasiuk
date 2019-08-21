@@ -34,12 +34,14 @@ public class DepartmentRestController {
     }
 
     @GetMapping(value = "/departments/{id}")
+    @ResponseStatus(value = HttpStatus.OK)
     public Department findById(@PathVariable Integer id) {
         LOGGER.debug("find department by id({})", id);
         return service.findById(id);
     }
 
     @PutMapping()
+    @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@RequestBody Department department) {
         LOGGER.debug("update department ({})", department);
         service.update(department);

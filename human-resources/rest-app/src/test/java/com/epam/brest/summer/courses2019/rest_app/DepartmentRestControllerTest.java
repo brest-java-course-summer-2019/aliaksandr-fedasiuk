@@ -25,8 +25,7 @@ import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -113,7 +112,7 @@ public class DepartmentRestControllerTest {
     }
 
     @Test
-    public void shouldUpdatePage() throws Exception {
+    public void shouldUpdateDepartment() throws Exception {
 
         Department department = createDepartmentFixture(1);
         String json = new ObjectMapper().writeValueAsString(department);
@@ -122,7 +121,7 @@ public class DepartmentRestControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .content(json)
-        ).andExpect(status().isOk());
+        ).andExpect(status().isAccepted());
     }
 
 }
