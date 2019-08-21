@@ -2,6 +2,7 @@ package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Department;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.RowMapper;
@@ -60,9 +61,10 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     @Override
     public void update(Department department) {
-        Optional.of(namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(department)))
-                .filter(this::successfullyUpdated)
-                .orElseThrow(() -> new RuntimeException("Failed to update department in DB"));
+        if (namedParameterJdbcTemplate.update(updateSql, new BeanPropertySqlParameterSource(department)) < 1) {
+            throw new EmptyResultDataAccessException(
+                    String.format("Failed to update. '%s' not found in the DB", department), 1);
+        }
     }
 
     private boolean successfullyUpdated(int numRowsUpdated) {

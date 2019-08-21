@@ -26,6 +26,7 @@ import java.util.Arrays;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -60,7 +61,7 @@ public class DepartmentRestControllerTest {
     @Test
     public void departments() throws Exception {
 
-        Mockito.when(service.findAll()).thenReturn(Arrays.asList(create(0), create(1)));
+        Mockito.when(service.findAll()).thenReturn(Arrays.asList(createDepartmentFixture(0), createDepartmentFixture(1)));
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/departments")
@@ -76,7 +77,7 @@ public class DepartmentRestControllerTest {
         Mockito.verify(service).findAll();
     }
 
-    private Department create(int index) {
+    private Department createDepartmentFixture(int index) {
         Department department = new Department();
         department.setDepartmentName("def" + index);
         department.setDepartmentId(index);
@@ -86,7 +87,7 @@ public class DepartmentRestControllerTest {
     @Test
     public void shouldPersistDepartment() throws Exception {
 
-        Department expectedDepartment = create(3);
+        Department expectedDepartment = createDepartmentFixture(3);
 
         Department inputDepartment = new Department()
                 .setDepartmentName(expectedDepartment.getDepartmentName());
@@ -110,4 +111,18 @@ public class DepartmentRestControllerTest {
         assertEquals(expectedDepartment.getDepartmentId(), result.getDepartmentId());
 
     }
+
+    @Test
+    public void shouldUpdatePage() throws Exception {
+
+        Department department = createDepartmentFixture(1);
+        String json = new ObjectMapper().writeValueAsString(department);
+
+        mockMvc.perform(put("/department")
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .content(json)
+        ).andExpect(status().isOk());
+    }
+
 }
