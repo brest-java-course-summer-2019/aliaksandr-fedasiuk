@@ -66,4 +66,9 @@ public class DepartmentServiceImpl implements DepartmentService {
             departmentDao.add(department);
         }
     }
+
+    @Override
+    public Department add(Department department) {
+        return departmentDao.add(department);
+    }
 }

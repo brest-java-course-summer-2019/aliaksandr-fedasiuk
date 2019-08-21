@@ -2,6 +2,7 @@ package com.epam.brest.summer.courses2019.rest_app;
 
 import com.epam.brest.summer.courses2019.model.Department;
 import com.epam.brest.summer.courses2019.service.DepartmentService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +12,7 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
@@ -20,6 +22,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = {"classpath:rest-spring-test.xml"})
@@ -31,7 +39,10 @@ public class DepartmentRestControllerTest {
     @Autowired
     private DepartmentService service;
 
+    ObjectMapper objectMapper = new ObjectMapper();
+
     private MockMvc mockMvc;
+
 
     @BeforeEach
     public void before() {
@@ -43,7 +54,7 @@ public class DepartmentRestControllerTest {
 
     @AfterEach
     public void after() {
-        Mockito.verifyNoMoreInteractions(service);
+        Mockito.reset(service);
     }
 
     @Test
@@ -70,5 +81,33 @@ public class DepartmentRestControllerTest {
         department.setDepartmentName("def" + index);
         department.setDepartmentId(index);
         return department;
+    }
+
+    @Test
+    public void shouldPersistDepartment() throws Exception {
+
+        Department expectedDepartment = create(3);
+
+        Department inputDepartment = new Department()
+                .setDepartmentName(expectedDepartment.getDepartmentName());
+
+        String json = new ObjectMapper().writeValueAsString(inputDepartment);
+
+        Mockito.when(service.add(any(Department.class))).thenReturn(expectedDepartment);
+
+        MockHttpServletResponse response = mockMvc.perform(
+                post("/department")
+                        .accept(MediaType.APPLICATION_JSON)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(json)
+        ).andDo(print())
+                .andExpect(status().isCreated())
+                .andReturn().getResponse();
+
+        String content = response.getContentAsString();
+        Department result = objectMapper.readValue(content, Department.class);
+        assertEquals(expectedDepartment.getDepartmentName(), result.getDepartmentName());
+        assertEquals(expectedDepartment.getDepartmentId(), result.getDepartmentId());
+
     }
 }

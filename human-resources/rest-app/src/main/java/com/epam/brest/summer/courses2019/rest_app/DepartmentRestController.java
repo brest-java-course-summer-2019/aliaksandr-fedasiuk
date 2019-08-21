@@ -6,6 +6,8 @@ import com.epam.brest.summer.courses2019.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -50,9 +52,11 @@ public class DepartmentRestController {
     }
 
     @PostMapping()
-    public void add(@RequestBody Department department) {
+    public ResponseEntity<Department> add(@RequestBody Department department) {
+
         LOGGER.debug("add department({})", department);
-        service.add(department);
+        Department result = service.add(department);
+        return new ResponseEntity<>(result, HttpStatus.CREATED);
     }
 
 }

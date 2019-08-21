@@ -47,4 +47,6 @@ public interface DepartmentService {
     void delete(int id);
 
     void add(Department... departments);
+
+    Department add(Department department);
 }

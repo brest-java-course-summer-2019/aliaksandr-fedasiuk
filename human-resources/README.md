@@ -24,3 +24,22 @@
       
   Open [http://localhost:8080](http://localhost:8080/hello) 
   
+  
+  ## REST server
+  
+  Start REST app:
+    
+    cd rest-app
+    mvn jetty:run
+  
+  ### Try CURL requests
+  
+  Get all departments:
+  
+    curl -v localhost:8088/departments  
+   
+  Create new department via REST:
+   
+    curl -H "Content-Type: application/json" -X POST -d '{"departmentId":null,"departmentName":"xyz"}' -v localhost:8088/department 
+  
+  

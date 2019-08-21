@@ -61,4 +61,12 @@ public class DepartmentRestConsumer implements DepartmentService {
             restTemplate.postForEntity(url, department, Department.class);
         }
     }
+
+    @Override
+    public Department add(Department department) {
+        LOGGER.debug("add({})", department);
+        ResponseEntity responseEntity = restTemplate.postForEntity(url, department, Department.class);
+        Object result = responseEntity.getBody();
+        return (Department) result;
+    }
 }
