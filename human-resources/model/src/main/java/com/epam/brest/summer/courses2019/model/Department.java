@@ -62,8 +62,9 @@ public class Department {
      *
      * @param departmentName Department Name.
      */
-    public void setDepartmentName(final String departmentName) {
+    public Department setDepartmentName(String departmentName) {
         this.departmentName = departmentName;
+        return this;
     }
 
     /**
