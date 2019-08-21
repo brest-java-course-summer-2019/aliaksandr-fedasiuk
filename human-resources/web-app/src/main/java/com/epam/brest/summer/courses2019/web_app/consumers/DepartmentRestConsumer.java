@@ -1,6 +1,7 @@
 package com.epam.brest.summer.courses2019.web_app.consumers;
 
 import com.epam.brest.summer.courses2019.model.Department;
+import com.epam.brest.summer.courses2019.model.stub.DepartmentStub;
 import com.epam.brest.summer.courses2019.service.DepartmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,10 +29,10 @@ public class DepartmentRestConsumer implements DepartmentService {
     }
 
     @Override
-    public List<Department> findAllWithAvgSalary() {
+    public List<DepartmentStub> findAllWithAvgSalary() {
         LOGGER.debug("findAllWithAvgSalary()");
         ResponseEntity responseEntity = restTemplate.getForEntity(url + "/with_avg_salary", List.class);
-        return (List<Department>) responseEntity.getBody();
+        return (List<DepartmentStub>) responseEntity.getBody();
     }
 
     @Override

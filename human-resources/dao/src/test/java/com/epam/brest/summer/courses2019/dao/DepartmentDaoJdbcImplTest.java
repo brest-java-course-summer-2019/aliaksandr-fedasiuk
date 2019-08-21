@@ -1,6 +1,7 @@
 package com.epam.brest.summer.courses2019.dao;
 
 import com.epam.brest.summer.courses2019.model.Department;
+import com.epam.brest.summer.courses2019.model.stub.DepartmentStub;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,9 @@ public class DepartmentDaoJdbcImplTest {
     @Autowired
     DepartmentDao departmentDao;
 
+    @Autowired
+    DepartmentStubDao departmentStubDao;
+
     @Test
     public void findAll() {
         List<Department> departments = departmentDao.findAll();
@@ -35,7 +39,7 @@ public class DepartmentDaoJdbcImplTest {
 
     @Test
     public void findAllWithAvgSalary() {
-        List<Department> departments = departmentDao.findAllWithAvgSalary();
+        List<DepartmentStub> departments = departmentStubDao.findAllWithAvgSalary();
         assertNotNull(departments);
         assertTrue(departments.size() > 0);
         assertTrue(departments.get(0).getAvgSalary().intValue() > 0);

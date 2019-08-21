@@ -1,9 +1,11 @@
-package com.epam.brest.summer.courses2019.model;
+package com.epam.brest.summer.courses2019.model.stub;
+
+import java.math.BigDecimal;
 
 /**
  * POJO Department for model.
  */
-public class Department {
+public class DepartmentStub {
 
     /**
      * Department Id.
@@ -16,9 +18,14 @@ public class Department {
     private String departmentName;
 
     /**
+     * Average salary of the Department.
+     */
+    private BigDecimal avgSalary;
+
+    /**
      * Constructor without arguments.
      */
-    public Department() {
+    public DepartmentStub() {
     }
 
     /**
@@ -26,7 +33,7 @@ public class Department {
      *
      * @param departmentName department name
      */
-    public Department(String departmentName) {
+    public DepartmentStub(String departmentName) {
         this.departmentName = departmentName;
     }
 
@@ -67,13 +74,33 @@ public class Department {
     }
 
     /**
+     * Returns <code>BigDecimal</code> representation of average salary
+     * for the Department.
+     *
+     * @return departmentId.
+     */
+    public BigDecimal getAvgSalary() {
+        return avgSalary;
+    }
+
+    /**
+     * Sets the department's average salary.
+     *
+     * @param avgSalary Average salary.
+     */
+    public void setAvgSalary(final BigDecimal avgSalary) {
+        this.avgSalary = avgSalary;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
     public String toString() {
-        return "Department{"
+        return "DepartmentStub{"
                 + "departentId=" + departmentId
                 + ", departmentName='" + departmentName + '\''
+                + ", avgSalary=" + avgSalary
                 + '}';
     }
 }

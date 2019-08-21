@@ -16,11 +16,14 @@
     <bean id="departmentDao" class="com.epam.brest.summer.courses2019.dao.DepartmentDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>
     </bean>
+    <bean id="departmentStubDao" class="com.epam.brest.summer.courses2019.dao.DepartmentStubDaoJdbcImpl">
+        <constructor-arg ref="namedParameterJdbcTemplate"/>
+    </bean>
 
     <bean id="departmentService" class="com.epam.brest.summer.courses2019.service.DepartmentServiceImpl">
         <constructor-arg ref="departmentDao"/>
+        <constructor-arg ref="departmentStubDao"/>
     </bean>
-
 
     <bean id="employeeDao" class="com.epam.brest.summer.courses2019.dao.EmployeeDaoJdbcImpl">
         <constructor-arg ref="namedParameterJdbcTemplate"/>

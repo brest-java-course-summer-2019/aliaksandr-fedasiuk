@@ -12,6 +12,10 @@
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>
 
+    <bean id="departmentStubDao" class="com.epam.brest.summer.courses2019.dao.DepartmentStubDaoJdbcImpl">
+        <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
+    </bean>
+
     <bean id="employeeDao" class="com.epam.brest.summer.courses2019.dao.EmployeeDaoJdbcImpl">
         <constructor-arg name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
     </bean>

@@ -10,22 +10,15 @@ public class DepartmentTest {
     Department department = new Department();
 
     @Test
-    public void getDepartentId() {
+    public void getDepartmentId() {
         department.setDepartmentId(15);
         Assert.assertTrue(department.getDepartmentId().equals(15));
     }
 
     @Test
-    public void getDepartentName() {
+    public void getDepartmentName() {
         department.setDepartmentName("IT");
         Assert.assertTrue(department.getDepartmentName().equals("IT"));
     }
-
-    @Test
-    public void getAvgSalary() {
-        department.setAvgSalary(new BigDecimal("12.12"));
-        Assert.assertTrue(department.getAvgSalary().compareTo(new BigDecimal("12.12")) == 0);
-    }
-
 
 }

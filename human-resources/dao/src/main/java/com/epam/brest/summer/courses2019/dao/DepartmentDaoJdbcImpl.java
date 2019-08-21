@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- *  Department DAO Interface implementation.
+ * Department DAO Interface implementation.
  */
 @Component
 public class DepartmentDaoJdbcImpl implements DepartmentDao {
@@ -27,13 +27,6 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
 
     private final static String SELECT_ALL =
             "select d.department_id, d.department_name from department d order by 2";
-
-    private static final String SELECT_ALL_WITH_AVG_SALARY =
-            "select d.department_id, d.department_name, avg(e.salary) as avgSalary"
-                    + " from department d"
-                    + " left join employee e on d.department_id = e.department_id"
-                    + " group by d.department_id, d.department_name"
-                    + " order by department_name";
 
     private static final String FIND_BY_ID =
             "select department_id, department_name from department where department_id = :departmentId";
@@ -87,13 +80,6 @@ public class DepartmentDaoJdbcImpl implements DepartmentDao {
     @Override
     public List<Department> findAll() {
         List<Department> departments = namedParameterJdbcTemplate.query(SELECT_ALL, new DepartmentRowMapper());
-        return departments;
-    }
-
-    @Override
-    public List<Department> findAllWithAvgSalary() {
-        List<Department> departments = namedParameterJdbcTemplate.query(SELECT_ALL_WITH_AVG_SALARY,
-                BeanPropertyRowMapper.newInstance(Department.class));
         return departments;
     }
 

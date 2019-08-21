@@ -383,6 +383,9 @@
                                     </limits>
                                 </rule>
                             </rules>
+                            <excludes>
+                                <exclude>com/epam/brest/summer/courses2019/model/**/*</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                     <execution>
